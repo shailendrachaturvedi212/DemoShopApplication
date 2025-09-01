@@ -3,6 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddScoped<IShoppingCart, ShoppingCart>(sp => ShoppingCart.GetCart(sp));
+builder.Services.AddSession();
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IPieRepository, PieRepository>();
 builder.Services.AddControllersWithViews();
@@ -13,11 +16,10 @@ builder.Services.AddDbContext<DemoShopPieDBContext>(options => {
 });
 var app = builder.Build();
 app.UseStaticFiles();
-if(app.Environment.IsDevelopment())
-{
+
     app.UseDeveloperExceptionPage();
-}
 app.UseRouting();
+app.UseSession();
 app.MapDefaultControllerRoute();
 DBInitilizer.Seed(app);
 //app.UseEndpoints(endpoints =>
