@@ -8,8 +8,9 @@ builder.Services.AddSession();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IPieRepository, PieRepository>();
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddRazorPages();
 builder.Services.AddDbContext<DemoShopPieDBContext>(options => {
     options.UseSqlServer(
         builder.Configuration["ConnectionStrings:DemoShopPieDbContextConnection"]);
@@ -21,6 +22,7 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseSession();
 app.MapDefaultControllerRoute();
+app.MapRazorPages();
 DBInitilizer.Seed(app);
 //app.UseEndpoints(endpoints =>
 //{
