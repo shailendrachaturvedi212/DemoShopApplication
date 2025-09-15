@@ -34,7 +34,7 @@ namespace DemoShopApplication.Models
 
         public IEnumerable<Pie> SearchPies(string searchQuery)
         {
-            throw new NotImplementedException();
+            return _demoShopPieDbContext.Pies.Where(p => p.Name.Contains(searchQuery));
         }
     }
 }

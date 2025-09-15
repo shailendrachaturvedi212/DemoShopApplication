@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace DemoShopApplication.Models
 {
-    public class DemoShopPieDBContext : DbContext
+    public class DemoShopPieDBContext : IdentityDbContext
     {
         public DemoShopPieDBContext(DbContextOptions<DemoShopPieDBContext> options) : base(options)
         {
